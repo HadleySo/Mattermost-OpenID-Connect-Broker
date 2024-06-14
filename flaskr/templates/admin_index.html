@@ -1,0 +1,72 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} Admin {% endblock %} 
+{% block title %} Admin {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+<section class="width_limit user-select-none text-center">
+
+    <br>
+    
+    <h2>IdP Admin</h2>
+    
+    <br>
+
+    <a class="btn btn-outline-secondary logo-wrap" type="button" href="/admin/list-all">List All Users</a>
+    <a class="btn btn-outline-secondary logo-wrap" type="button" href="/admin/list-sessions">List All Sessions</a>
+
+    <br><br>
+
+    <a class="btn btn-outline-secondary logo-wrap" type="button" href="/admin/list-domains">List Domains</a>
+    <a class="btn btn-outline-secondary logo-wrap" type="button" href="/admin/add-domain">Add Domain</a>
+
+
+    <br>
+    <br>
+    <br>
+
+    {% import 'macro.html' as globalMacro %}
+
+    <form action="" method="POST">
+        
+        <label class="form-label">User Search</label>
+        {{ globalMacro.userSelectSearch(form_name="user", delay=100) }}
+
+        <br>
+
+        {{ globalMacro.userEmailSearch(form_name="user", delay=100) }}
+
+        <br><br>
+        <button formaction="/admin/user-info/" class="btn btn-secondary">User Info</button>
+        <button formaction="/admin/list-sessions/" class="btn btn-secondary">User Sessions</button>
+        <button formaction="/admin/load-edit-form/" class="btn btn-secondary">Edit User</button>
+    </form>
+
+</section>
+
+<section class="message_error">
+    {{ error_section | safe }}
+</section>
+
+<style>
+    .width_limit {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 3vh;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .message_error {
+        color: red;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.2rem;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} Profile (Admin View) {% endblock %} 
+{% block title %} Profile (Admin View) {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+<section class="width_limit">
+
+    <br>
+
+    <h2>Current User Data:</h2>
+
+    <table class="table">
+        <tbody>
+            <tr>
+            <th scope="row" class="text-start">Origin ID</th>
+            <td class="text-start">{{ data['mattermost_id'] }}</td>
+            </tr>
+            <tr>
+            <th scope="row" class="text-start">Given Name</th>
+            <td class="text-start">{{ data['first_name'] }}</td>
+            </tr>
+            <tr>
+            <th scope="row" class="text-start">Family Name</th>
+            <td class="text-start">{{ data['last_name'] }}</td>
+            </tr>
+            <tr>
+            <th scope="row" class="text-start">Nickname</th>
+            <td class="text-start">{{ data['nickname'] }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <br>
+    <hr>
+    <br>
+
+    <h2>Update User Data:</h2>
+    <form action="" method="post">
+        <input type="hidden" name="id" value="{{ data['mattermost_id'] }}">
+        <div class="input-group mb-3">
+            <span class="input-group-text">First & Last Name</span>
+            <input type="text" aria-label="First name" class="form-control" name="first_name" value="{{ data['first_name'] }}">
+            <input type="text" aria-label="Last name" class="form-control" name="last_name" value="{{ data['last_name'] }}">
+        </div>
+    
+        <div class="input-group mb-3">
+            <span class="input-group-text">Nickname</span>
+            <input type="text" aria-label="Nickname" class="form-control" name="nickname" value="{{ data['nickname'] }}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+      
+
+      
+</section>
+
+<section class="message_error">
+    {{ error_section | safe }}
+</section>
+
+<style>
+    .width_limit {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 3vh;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .message_error {
+        color: red;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.2rem;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+[Unit]
+Description=Mattermost OIDC Broker Service
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/<DIR>
+Environment="PATH=/var/www/<DIR>/venv/bin"
+ExecStart=/var/www/<DIR>/venv/bin/gunicorn --workers 3 --max-requests 50 --max-requests-jitter 5 --bind unix:mm_oidc_broker.sock -m 007 app:app
+
+[Install]
+WantedBy=multi-user.target

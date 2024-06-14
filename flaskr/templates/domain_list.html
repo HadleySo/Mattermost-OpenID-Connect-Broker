@@ -1,0 +1,79 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} Domains {% endblock %} 
+{% block title %} Domains {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+<section class="width_limit user-select-none text-center">
+
+    <br>
+    
+    <h2>Domains</h2>
+    
+    <br>
+
+    <table class="table table-hover" style="margin-left: auto; margin-right: auto;">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">domain</th>
+            <th scope="col">display_name</th>
+            <th scope="col">local_regex</th>
+            <th scope="col">username_prepend</th>
+            <th scope="col">username_append</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for domain in domainData %}
+                <tr>
+                    
+                    <td>
+                        {{  domain['id'] }}
+                    </td>
+                    <td>
+                        {{  domain['domain'] }}
+                    </td>
+                    <td>
+                        {{  domain['display_name'] }}
+                    </td>
+                    <td>
+                        {{  domain['local_regex'] }}
+                    </td>
+                    <td>
+                        {{  domain['username_prepend'] }}
+                    </td>
+                    <td>
+                        {{  domain['username_append'] }}
+                    </td>
+
+                </tr>        
+            {% endfor %}
+        </tbody>
+      </table>
+
+
+</section>
+
+<section class="message_error">
+    {{ error_section | safe }}
+</section>
+
+<style>
+    .width_limit {
+        padding-top: 3vh;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .message_error {
+        color: red;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.2rem;
+    }
+</style>
+
+{% endblock %}

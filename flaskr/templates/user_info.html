@@ -1,0 +1,67 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} Profile {% endblock %} 
+{% block title %} Profile {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+<section class="width_limit user-select-none text-center">
+
+    <br>
+        
+    <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row" class="text-start">Origin ID</th>
+            <td class="text-start">***</td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start">Given Name</th>
+            <td class="text-start">{{ data['given_name'] }}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start">Family Name</th>
+            <td class="text-start">{{ data['family_name'] }}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start">Domain Username</th>
+            <td class="text-start">{{ data['preferred_username'] }}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start">Email</th>
+            <td class="text-start">{{ data['email'] }}</td>
+          </tr>
+          <tr>
+            <th scope="row" class="text-start">Member Since</th>
+            <td class="text-start">{{ data['updated_at'] | joindate }} <small>({{ data['updated_at'] }})</small></td>
+          </tr>
+
+        </tbody>
+      </table>
+</section>
+
+<section class="message_error">
+    {{ error_section | safe }}
+</section>
+
+<style>
+    .width_limit {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 3vh;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .message_error {
+        color: red;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.2rem;
+    }
+</style>
+
+{% endblock %}

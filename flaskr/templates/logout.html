@@ -1,0 +1,62 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} Sign Out {% endblock %} 
+{% block title %} Sign Out {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+<div class="message_norm user-select-none">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" style="max-height: 46px; padding-bottom: 10px;">
+
+    <br>
+
+    <b style="font-size: 24px;">You signed out of your account</b>
+    
+    <br><br>
+    <p>Sign out of <a href="{{ ife_MATTERMOST_URL }}" class="user-select-all">Mattermost</a> to completely sign out of this device.</p>
+    <p>Sign back into <a href="{{ ife_AUTHENTIK_DOMAIN }}" class="user-select-all">Authentik</a> or <a href="/" class="user-select-all">IdP Broker</a>.</p>
+
+
+    <p class="font-monospace text-muted user-select-all" style="font-size: 9px;">{{ CF_RAY_id }}</p>
+</div>
+
+
+<style>
+    body {
+        background-color: #f2f2f2;
+    }
+    .message_norm {
+        background-color: white;
+        border-color: rgb(170, 168, 168);
+        border-style: solid;
+        border-width: 1px;
+        max-width: 440px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+        font-size: 1.2rem;
+        margin-top: max(30vh, 100px);
+        padding: 44px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        font-size: 15px;
+    }
+
+    @media screen and (max-width: 600px) {        
+        .message_norm {
+            border: none;
+            border-color: transparent;
+            margin-top: 0px;
+            box-shadow: none;
+            padding: 24px;
+        }
+        body {
+            background-color: white;
+        }
+    }
+
+</style>
+
+
+{% endblock %}

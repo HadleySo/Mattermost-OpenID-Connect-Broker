@@ -1,0 +1,176 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} Session Detail {% endblock %} 
+{% block title %} Session Detail {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+<section class="width_limit user-select-none text-center">
+    
+    <br>
+
+    <table class="table table-hover table-sm" style="margin-left: auto; margin-right: auto; width: fit-content;">
+        <tbody style="font-size: 12px;">
+            {% for session in data %}
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Session ID
+                    </td>
+                    <td class="text-start">
+                        {{  session[0]['session_id'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Domain Username
+                    </td>
+                    <td class="text-start">
+                        {{ session[1]['preferred_username']}}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Email
+                    </td>
+                    <td class="text-start">
+                        {{ session[1]['email']}}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Given Name
+                    </td>
+                    <td class="text-start">
+                        {{ session[1]['first_name']}} 
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Family Name
+                    </td>
+                    <td class="text-start">
+                        {{ session[1]['last_name']}}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Creation Date
+                    </td>
+                    <td class="text-start">
+                        {{  session[0]['created_timedate'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Creation Date
+                    </td>
+                    <td class="text-start">
+                        {{  session[0]['created_timedate'] | ctime }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Session Valid
+                    </td>
+                    <td class="text-start">
+                        {{  session[0]['valid'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Ray ID
+                    </td>
+                    <td class="text-start">
+                        {{  session[0]['cf_ray'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        City
+                    </td>
+                    <td class="text-start">
+                        {{  session[0]['cf_ipcity'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Country
+                    </td>
+                    <td class="text-start">
+                        {{  session[0]['cf_country'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Latitude
+                    </td>
+                    <td class="text-start">
+                        {{  session[0]['cf_iplatitude'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Longitude
+                    </td>
+                    <td class="text-start">
+                        {{  session[0]['cf_iplongitude'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        IP Address
+                    </td>
+                    <td class="text-start">
+                        {{  session[0]['ip_address'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        User Agent
+                    </td>
+                    <td class="text-start">
+                        {{  session[0]['user_agent'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 30%" class="text-start fw-bold">
+                        Revoke
+                    </td>
+                    <td>
+                        <form action="/revoke-session" method="POST" style="width: fit-content;">
+                            <input type="hidden" name="session_id" id="" value="{{  session[0]['session_id'] }}">
+                            <input type="submit" name="submit" id="" class="btn btn-danger btn-sm" value="Revoke">
+                        </form>
+                    </td>
+                </tr>
+
+ 
+            {% endfor %}
+        </tbody>
+      </table>
+
+
+</section>
+
+<section class="message_error">
+    {{ error_section | safe }}
+</section>
+
+<style>
+    .width_limit {
+        padding-top: 3vh;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .message_error {
+        color: red;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.2rem;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% macro showLoadingIcon() -%}
+    <script>
+
+        function showLoadingIcon() {
+            document.getElementById('post-js-check').style.display = "none";
+            document.getElementById('loading-icon').style.display = "block";
+        
+        }
+    </script>
+{%- endmacro %}
+
+
+
+{% macro userSelectSearch(form_name="user", delay=3000) -%}
+
+    <!-- JQUERY AND SELECT2 -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/select2.min.css') }}">
+    <script src="{{ url_for('static', filename='js/select2.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/select2-bootstrap4.min.css') }}">
+
+
+    <select class="form-select userSelectJqSelectTwo"  aria-label="User" name="{{ form_name }}" style="width: 100%;">
+    </select>
+    <script>
+        $('.userSelectJqSelectTwo').select2({
+            ajax: {
+                delay: '{{ delay }}',
+                url: '/api/v1/admin/users/search',
+                dataType: 'json',
+                theme: 'bootstrap4',
+                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+            },
+            placeholder: 'Search by first name',
+            minimumInputLength: 3,
+            });
+    </script>
+{%- endmacro %}
+
+{% macro userEmailSearch(form_name="user", delay=3000) -%}
+
+    <!-- JQUERY AND SELECT2 -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/select2.min.css') }}">
+    <script src="{{ url_for('static', filename='js/select2.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/select2-bootstrap4.min.css') }}">
+
+
+    <select class="form-select emailSelectJqSelectTwo"  aria-label="User" name="{{ form_name }}" style="width: 100%;">
+    </select>
+    <script>
+        $('.emailSelectJqSelectTwo').select2({
+            ajax: {
+                delay: '{{ delay }}',
+                url: '/api/v1/admin/email/search',
+                dataType: 'json',
+                theme: 'bootstrap4',
+                // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+            },
+            placeholder: 'Search by email',
+            minimumInputLength: 3,
+            });
+    </script>
+{%- endmacro %}

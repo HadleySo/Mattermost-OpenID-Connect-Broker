@@ -1,0 +1,49 @@
+
+{% extends "global.html" %} 
+
+{% block ogTitle %} Review OIDC Connection {% endblock %} 
+{% block title %} Review OIDC Connection {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+
+    <br>
+
+    <div class="card" style="max-width: 400px; margin-left: auto; margin-right: auto;">
+        <div class="card-header">
+            IEM IdP OpenID Connect 
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><strong>{{grant.client.client_name}}</strong> is requesting:</h5>
+          <p class="card-text">{{ grant.request.scope }}</p>
+
+
+
+
+            <form action="" method="post" name="approveOIDC">
+                <br>
+                <input type="hidden" name="confirm" id="confirm" value="confirm">
+                <button type="submit" class="btn btn-primary">
+                    <div class="spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Approving...</span>
+                      </div>
+                      &emsp13;
+                    Approving...
+                </button> &emsp13;
+                <a href="/logout" class="btn btn-secondary">Cancel</a>
+            </form>
+
+            <script>
+                window.setTimeout(function() { document.approveOIDC.submit(); }, 1500);
+            </script>
+
+        </div>
+    </div>
+  
+
+  
+  
+{% endblock %}
+

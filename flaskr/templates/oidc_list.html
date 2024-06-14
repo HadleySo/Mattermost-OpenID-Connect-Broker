@@ -1,0 +1,62 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} OIDC Home {% endblock %} 
+{% block title %} OIDC Home Client {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+    <div style="max-width: 90vw; margin-left: auto; margin-right: auto;">
+
+        <br>
+
+        <h1 style="text-align: center;">
+            OIDC Clients
+        </h1>
+
+        <br>
+
+
+        {% for client in clients %}
+            {% set cl_info = client.client_info %}
+            {% set cl_meta = client.client_metadata %}
+
+            <table>
+                {% for key, value in cl_info.items() %}
+                    <tr>
+                        <th>{{ key }}</th>
+                        <td>{{ value }}</td>
+                    </tr>
+                {% endfor %}
+
+               <tr><td>----</td></tr>
+
+                {% for key, value in cl_meta.items() %}
+                    <tr>
+                        <th>{{ key }}</th>
+                        <td>{{ value }}</td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+
+            <form action="{{ url_for('.post_delete_client') }}" method="post">
+                <input type="hidden" name="client_id" id="client_id" value="{{ client.client_info['client_id'] }}">
+                <small>
+                    <button type="submit" class="btn btn-outline-danger">Delete {{client.client_metadata['client_name'] }}</button>
+                </small>
+            </form>
+
+            <hr>
+        {% endfor %}
+
+        <br>
+        <div class="text-center">
+            <a href="{{ url_for('.get_create_client') }}" class="btn btn-primary">Create New Client</a>
+
+        </div>
+    </div>
+
+  
+{% endblock %}

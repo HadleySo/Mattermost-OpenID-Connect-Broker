@@ -1,0 +1,103 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} Users {% endblock %} 
+{% block title %} Users {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+<section class="width_limit user-select-none text-center">
+
+    <br>
+    
+    <h2>Users</h2>
+    
+    <br>
+
+    <table class="table table-hover" style="margin-left: auto; margin-right: auto;">
+        <thead>
+          <tr>
+            <th scope="col">id</th>
+            <th scope="col">mattermost_id</th>
+            <th scope="col">first_name</th>
+            <th scope="col">last_name</th>
+            <th scope="col">email</th>
+            <th scope="col">email_verified</th>
+            <th scope="col">mfa_active</th>
+            <th scope="col">time_last_visit</th>
+            <th scope="col">time_first_visit</th>
+            <th scope="col">nickname</th>
+            <th scope="col">create_at</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for user in userData %}
+                <tr>
+                    
+                    <td>
+                        {{  user['id'] }}
+                    </td>
+                    <td>
+                        {{  user['mattermost_id'] }} <br>
+                        <small>
+                            <a href="/admin/user-info/{{  user['mattermost_id'] }}" style="color: inherit; text-decoration: none;">Profile</a> - 
+                            <a href="/admin/list-sessions/{{  user['mattermost_id'] }}" style="color: inherit; text-decoration: none;">Sessions</a>
+                        </small>
+                    </td>
+                    <td>
+                        {{  user['first_name'] }}
+                    </td>
+                    <td>
+                        {{  user['last_name'] }}
+                    </td>
+                    <td>
+                        {{  user['email'] }}
+                    </td>
+                    <td>
+                        {{  user['email_verified'] }}
+                    </td>
+                    <td>
+                        {{  user['mfa_active'] }}
+                    </td>
+                    <td>
+                        {{  user['time_last_visit'] | ctime  }} <small>({{  user['time_last_visit'] }})</small>
+                    </td>
+                    <td>
+                        {{  user['time_first_visit']  |ctime }} <small>{{  user['time_first_visit'] }}</small>
+                    </td>
+                    <td>
+                        {{  user['nickname'] }}
+                    </td>
+                    <td>
+                        {{  user['create_at'] | joindate  }} <small>({{  user['create_at'] }})</small>
+                    </td>
+
+                </tr>        
+            {% endfor %}
+        </tbody>
+      </table>
+
+
+</section>
+
+<section class="message_error">
+    {{ error_section | safe }}
+</section>
+
+<style>
+    .width_limit {
+        padding-top: 3vh;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .message_error {
+        color: red;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.2rem;
+    }
+</style>
+
+{% endblock %}

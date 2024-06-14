@@ -1,0 +1,105 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} Sessions {% endblock %} 
+{% block title %} Sessions {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+<section class="width_limit user-select-none text-center">
+    
+    <br>
+    <a class="btn btn-outline-danger logo-wrap" type="button" href="/localAuth/user/revoke-sessions">Logout Everywhere</a>
+
+    <br><br>
+
+    <form action="" style="max-width: 200px; margin-left: auto; margin-right: auto;">
+        <label for="before_date" class="form-label">250 Entries before date:</label><br>
+        <input type="date" class="form-control" name="before_date" id="" required><br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <br><br>
+
+    <table class="table table-hover table-sm" style="margin-left: auto; margin-right: auto;">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Created On</th>
+            <th scope="col">Valid</th>
+            <th scope="col">RAY ID</th>
+            <th scope="col">City, Country / Lat / Long</th>
+            <th scope="col">IP Address</th>
+            <th scope="col">Agent</th>
+            <th scope="col">Info</th>
+          </tr>
+        </thead>
+        <tbody style="font-size: 12px;">
+            {% for session in data %}
+                {% if session[0]['valid'] == False %}
+                    <tr style="color: #c8c4c4;">
+                {% else %}
+                    <tr>
+                {% endif %}
+                    
+                    <td class="user-select-all">
+                        {{  session[0]['session_id'] }} <br>
+                        <small>{{ session[1]['preferred_username']}} | {{ session[1]['email']}} | {{ session[1]['first_name']}} {{ session[1]['last_name']}}</small>
+                    </td>
+                    <td class="user-select-all">
+                        {{  session[0]['created_timedate'] }} <br>
+                        <small>{{  session[0]['created_timedate'] | ctime }}</small>
+                    </td>
+                    <td class="user-select-all">
+                        {{  session[0]['valid'] }}
+                    </td>
+                    <td class="user-select-all">
+                        {{  session[0]['cf_ray'] }}
+                    </td>
+                    <td class="user-select-all">
+                        {{  session[0]['cf_ipcity'] }}, {{  session[0]['cf_country'] }} <br>
+                        <small>{{  session[0]['cf_iplatitude'] }} </small><br>
+                        <small>{{  session[0]['cf_iplongitude'] }}</small>
+                    </td>
+                    <td class="user-select-all">
+                        {{  session[0]['ip_address'] }}
+                    </td>
+                    <td class="user-select-all">
+                        <small>
+                            {{  session[0]['user_agent'] | truncate(24,true,'...') }}
+                        </small>
+                    </td>
+                    <td>
+
+                        <a href="/session/{{  session[0]['session_id'] }}" class="btn btn-secondary" role="button">Info</a>
+
+                    </td>
+                </tr>        
+            {% endfor %}
+        </tbody>
+      </table>
+
+
+</section>
+
+<section class="message_error">
+    {{ error_section | safe }}
+</section>
+
+<style>
+    .width_limit {
+        padding-top: 3vh;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .message_error {
+        color: red;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.2rem;
+    }
+</style>
+
+{% endblock %}

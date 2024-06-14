@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %} | IdP Broker</title>
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- BASE  -->
+    <base href="../">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    
+    <!-- SEO -->
+    <meta property="og:title" content="{% block ogTitle %}{% endblock %} | IdP Broker" />
+    <meta property="og:image" itemprop="image" content="{{ url_for('static', filename='images/logo.png') }}" />
+    <meta property="og:site_name" content="IdP Broker">
+    
+    <!-- Loading JS -->
+    <script src="{{ url_for('static', filename='js/checkJS.js') }}" defer></script>
+
+    <!-- ROBOTS -->
+    <meta name="google" content="nositelinkssearchbox" />
+    <meta name="robots" content="nofollow, noindex" />
+    
+    {% block CSS %}{% endblock %}
+
+</head>
+<body>
+
+    <!-- No JS Error -->
+    <div id="loading-icon" style="text-align: center; margin-top: 40vh;">
+        <img rel="preload" src="{{ url_for('static', filename='images/logo.png') }}" alt="" style="width: 10vmin; min-width: 90px;">
+        <p style="color: black;" id="JS_error_message">JavaScript must be enabled</p>
+    </div>
+
+    <div id="post-js-check" style="display: none;">
+        {% if show_internal_banner is sameas true %}
+            <section id="global-header-warning">
+                <nav class="navbar">
+                    <div class="container-fluid">
+                        <a href="/">
+                            <img src="{{ url_for('static', filename='images/logo.png') }}" class="nav-logo" style="-webkit-filter: invert(100%); filter: invert(100%);">
+                        </a>
+                        <h4>
+                            IdP & Authentication
+                        </h4>
+
+                      <div class="d-flex">
+                        <a class="btn btn-secondary btn-sm" href="/logout">Logout</a>
+                      </div>
+                    </div>
+                  </nav>
+
+            </section>
+        {% elif show_internal_banner == "Blank" %}
+        {% else %}
+            <section class="container-fluid user-select-none navbar-content-global-wrapper">
+                <div id="nav-bar-logo-wrap">
+                    <p>
+                        <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" class="nav-logo"></a>
+                        <br> IdP Broker
+                    </p>                
+                </div>
+            
+            </section>
+        {% endif %}
+
+
+        <div style="min-height: 70vh;">
+            {% block bodyContent %}{% endblock %}
+
+        </div>
+
+        <section>
+            <div class="footer-contain-wrap user-select-none">
+                <div class="footer container-fluid">
+                    <br>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12">
+                            <h2><img rel="preload" src="{{ url_for('static', filename='images/logo.png') }}" alt="" class="footer-logo-img"> IdP & OpenID Connect Broker</h2>
+                            <p class="user-select-all">Mattermost OpenID Connect Broker by <a href="https://hadleyso.com/" target="_blank" style="color: inherit;">Hadley So</a> is distributed under GNU Affero General Public License v3.0. 
+                                <br>To view a copy of this license, visit <a href="https://www.gnu.org/licenses/agpl-3.0.txt" target="_blank" style="color: inherit;">GNU AGPL-3.0</a></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12">
+                            <p>
+                                {{ portal_app_version }} &emsp; {{ timeStamp }} &emsp; {{ CF_ip_country }} &emsp; {{ CF_RAY_id }} 
+                            </p>
+                            <br><br>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+</body>

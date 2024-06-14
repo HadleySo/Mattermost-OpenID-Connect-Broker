@@ -1,0 +1,210 @@
+/* IMPORT FONTS -----------------------------------*/
+
+/* SANS */
+@font-face {
+    font-family: "Sans3-Black";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-Black.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-BlackItalic";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-BlackIt.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-Bold";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-Bold.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-BoldItalic";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-BoldIt.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-ExtraLight";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-ExtraLight.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-ExtraLightItalic";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-ExtraLightIt.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-Italic";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-It.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-Light";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-Light.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-LightItalic";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-LightIt.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-Medium";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-Medium.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-MediumItalic";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-MediumIt.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-Regular";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-Regular.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-Semibold";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-Semibold.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Sans3-SemiboldItalic";
+    src: url("../fonts/source-sans-3_052R/SourceSans3-SemiboldIt.ttf.woff2") format("woff2");
+}
+  
+
+/* SERIF */
+
+@font-face {
+    font-family: "Serif4-Black";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-Black.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-BlackItalic";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-BlackIt.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-Bold";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-Bold.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-BoldItalic";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-BoldIt.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-ExtraLight";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-ExtraLight.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-ExtraLightItalic";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-ExtraLightIt.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-Italic";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-It.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-Light";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-Light.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-LightItalic";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-LightIt.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-Medium";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-Medium.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-MediumItalic";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-MediumIt.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-Regular";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-Regular.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-Semibold";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-Semibold.ttf.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Serif4-SemiboldItalic";
+    src: url("../fonts/source-serif-4_005/SourceSerif4-SemiboldIt.ttf.woff2") format("woff2");
+}
+
+
+/* SET COLORWAY -----------------------------------*/
+:root {
+    --ife_white: #fff;
+    --ife_off_white: rgba(255, 255, 255, 0.61);
+    --ife_text_primary: #333333;
+    --ife_illiniBlue_main: #131f33;
+    --ife_illiniBlue_shadeOne: #37445a;
+    --ife_illiniBlue_shadeTwo: #081222;
+    --ife_illiniOrange_main: #fa6300;
+    --ife_illiniOrange_shadeOne: #ff8637;
+}
+
+/* GLOBAL TEXT -------------------------- */
+
+body {
+    font-family: "Sans3-Regular", "Source Sans Pro", Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+#global-header-warning {
+    text-align: center;
+    font-family: "Sans3-Semibold", "Source Sans Pro", Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: rgb(30, 30, 226);
+    background-color: #131f33;
+    color: white;
+
+}
+#global-header-warning .navbar {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* HEADER --------------------------- */
+.nav-logo {
+    padding-top: .3125rem;
+	padding-bottom: .3125rem;
+	display: inline-block;
+	height: 65px;
+	width: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.navbar-brand {
+	padding-top: .3125rem;
+	padding-bottom: .3125rem;
+	margin-right: 0.1em;
+	font-size: 1.25rem;
+	text-decoration: none;
+	white-space: nowrap;
+}
+#nav-bar-logo-wrap p {
+    font-size: 25px;
+    font-family: "Sans3-Semibold", "Source Sans Pro", Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+.navbar-content-global-wrapper {
+	max-width: 1040px;
+}
+
+/* FOOTER -----------------------------------*/
+.footer-contain-wrap {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.footer-logo-img {
+    width: 1em;
+    height: auto;
+}
+.footer {
+    font-family: "Sans3-Regular", "Source Sans Pro", Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--ife_text_primary);
+    text-align: left;
+
+    line-height: 18px;
+    font-weight: 400;;
+}
+.footer p {
+    font-size: 13px;
+    margin-bottom: 0.5em;
+    line-height: 1.5em;
+    font-weight: 400;
+}
+.footer h2 {
+    font-family: "Sans3-Regular", "Source Sans Pro", Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 25px;
+    color: var(--ife_text_primary);
+    line-height: 1.2;
+    font-weight: 500;
+}

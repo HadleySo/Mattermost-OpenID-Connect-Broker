@@ -1,0 +1,84 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} Authentication Providers {% endblock %} 
+{% block title %} Authentication Providers {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+<section class="width_limit user-select-none">
+
+    <div class="d-grid gap-2 col-8 mx-auto">
+        <p style="margin: 0; font-style: italic;">
+            <small>Click 'View in Browser'</small>
+        </p>
+        {% if service_uri|length > 5 %}   
+            <a class="btn btn-outline-secondary logo-wrap" id="mm_login" href="{{ url_for('local_auth.ife_login_mattermost') }}?service_uri={{ service_uri }}">
+                Sign in with <img src="{{ url_for('static', filename='images/Mattermost_logo_horizontal.png') }}" alt="Mattermost" class="mattermost-logo">
+            </a>
+        {% else %}
+            <a class="btn btn-outline-secondary logo-wrap" id="mm_login" type="button" href="{{ url_for('local_auth.ife_login_mattermost') }}">
+                Sign in with <img src="{{ url_for('static', filename='images/Mattermost_logo_horizontal.png') }}" alt="Mattermost" class="mattermost-logo">
+            </a>
+        {% endif %}
+
+        <br><br>
+
+        <div style="text-align: center;">
+            <div class="spinner-border spinner-border-sm" role="status">
+            </div>
+            <span role="status">&emsp13; authenticating with Mattermost...</span>
+        </div>
+
+    </div>
+
+    <br>
+
+    <hr>
+
+    <br>
+    
+    <div style="text-align: right;" class="d-grid gap-2 col-8 mx-auto">
+
+        <a class="btn btn-sm btn-outline-secondary logo-wrap" type="button" href="{{ url_for('local_auth.logout') }}">Cancel Sign In</a>
+
+    </div>
+
+    <br><br>
+
+    <small class="text-secondary" style="--bs-text-opacity: .5;">{{ CF_RAY_id.split('-')[1] }}</small>
+
+    
+</section>
+
+
+<style>
+    .width_limit {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 3vh;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .mattermost-logo {
+        height: 20px;
+        vertical-align: middle;
+        padding-bottom: 2px;
+    }
+    .logo-wrap {
+        color: black;
+    }
+    .logo-wrap:hover img {
+        filter: invert(100%);
+        -webkit-filter: invert(100%);
+    }
+</style>
+
+
+<script>
+    window.setTimeout(function() { document.getElementById("mm_login").click(); }, 1500);
+</script>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} Home {% endblock %} 
+{% block title %} Home {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+<section class="width_limit user-select-none text-center">
+
+    <br>
+    
+    <h3>Welcome {{ first_name }}, you're signed in!</h3>
+    
+    <br>
+
+    <a class="btn btn-primary logo-wrap" type="button" href="/logout"><b>Logout</b></a>
+
+    <br><br>
+    <a class="btn btn-outline-secondary logo-wrap" type="button" href="/my-sessions">My Sign-ins</a>
+    <a class="btn btn-outline-secondary logo-wrap" type="button" href="/my-info">My Profile</a>
+    {% if is_admin %}
+    <a class="btn btn-outline-secondary logo-wrap" type="button" href="/admin">Admin</a>
+    {% endif %}
+
+
+</section>
+
+<section class="message_error">
+    {{ error_section | safe }}
+</section>
+
+<style>
+    .width_limit {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 3vh;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .message_error {
+        color: red;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.2rem;
+    }
+</style>
+
+{% endblock %}

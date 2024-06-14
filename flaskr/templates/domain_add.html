@@ -1,0 +1,51 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} Add Domain {% endblock %} 
+{% block title %} Add Domain {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+<br>
+<h2 style="text-align: center;">
+    Add Domain
+</h2>
+
+<form action="" method="post" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+    <div class="mb-3">
+        <label for="" class="form-label">Domain</label><br>
+        <input class="form-control" type="text" name="domain" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Display Name</label><br>
+        <input class="form-control" type="text" name="display_name">
+    </div>
+
+    <div class="mb-3">
+        <label for="" class="form-label">Local Regex (Regex to validate local part of email)</label><br>
+        <input class="form-control" type="text" name="local_regex" required>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <label for="" class="form-label">Username Prepend</label><br>
+            <input class="form-control" type="text" name="username_prepend">
+        </div>
+        <div class="col">
+            <label for="" class="form-label">Username Append</label><br>
+            <input class="form-control" type="text" name="username_append">
+        </div>
+    </div>
+
+
+    <div class="my-3">
+        <p>This action cannot be reversed after submitting.</p>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+  </form>
+
+
+{% endblock %}

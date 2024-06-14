@@ -1,0 +1,42 @@
+{% extends "global.html" %} 
+
+{% block ogTitle %} 500! {% endblock %} 
+{% block title %} 500! {% endblock %} 
+{% block CSS %}
+{% endblock %}
+
+{% block bodyContent %}
+
+<section class="message">
+    <br><br>
+
+    <h1>Oop! The portal broke...</h1>
+    <br>
+    <h3>
+        There was an error in handling your request &#8212; 500
+    </h3>
+    <br>
+    <h3>
+        Lets <a href="/">try that  again</a>
+    </h3>
+</section>
+
+
+
+
+<style>
+    .message {
+        /* text-align: center; */
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    a, a:hover {
+        color: inherit;
+    }
+
+</style>
+
+{% endblock %}
