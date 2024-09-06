@@ -14,7 +14,10 @@ app = Flask(__name__, host_matching=True, static_host=cfg.get('DOMAINS', 'idp_do
 
 app.config['app_version'] = "2.4.0"
 app.config['ife_IDP_DOMAIN'] = cfg.get('DOMAINS', 'idp_domain')
-app.config['ife_AUTHENTIK_DOMAIN'] = cfg.get('DOMAINS', 'authentik_domain')
+app.config['ife_UPSTREAM_SSO_DOMAIN'] = cfg.get('DOMAINS', 'upstream_sso_domain')
+app.config['ife_UPSTREAM_COOKIE'] = cfg.get('DOMAINS', 'upstream_cookie')
+app.config['ife_UPSTREAM_SSO_PATH'] = cfg.get('DOMAINS', 'upstream_sso_path')
+
 app.config['ife_IDP_PROTOCOL'] = "https://"
 app.config['ife_GLOBAL_SSO_DOMAIN'] = cfg.get('DOMAINS', 'sso_domain')
 app.config['ife_MATTERMOST_URL'] = cfg.get('DOMAINS', 'mattermost_url')

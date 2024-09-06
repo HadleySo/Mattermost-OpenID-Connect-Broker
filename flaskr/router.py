@@ -51,7 +51,7 @@ def inject_template_globals():
         'CF_ip_country': request.headers.get('CF-IPCountry', "-"),
         'portal_app_version': app.config['app_version'] ,
         'ife_MATTERMOST_URL': app.config['ife_MATTERMOST_URL'],
-        'ife_AUTHENTIK_DOMAIN' : app.config['ife_AUTHENTIK_DOMAIN'],
+        'ife_UPSTREAM_SSO_DOMAIN' : app.config['ife_UPSTREAM_SSO_DOMAIN'],
         'date_utc_now': datetime.utcnow()
     }
 
