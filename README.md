@@ -4,15 +4,15 @@
 
 Protocol mapping between OAuth2 and upstream OpenID Connect clients. Allows a self hosted [Mattermost](https://mattermost.com/) instance to provide authentication to upstream authorization management like [Keycloak](https://github.com/keycloak/keycloak) or [Authentik](https://github.com/goauthentik/authentik). 
 
-Mattermost OpenID Connect Broker is meant to be used with [Keycloak](https://github.com/keycloak/keycloak) or [Authentik](https://github.com/goauthentik/authentik) with Mattermost OpenID Connect Broker acting as a middle layer; provides custom mappings for `preferred_username` based on email domains and pulls geolocation data from CloudFlare. 
+Mattermost OpenID Connect Broker is meant to be used with [Keycloak](https://github.com/keycloak/keycloak) or [Authentik](https://github.com/goauthentik/authentik) with Mattermost OpenID Connect Broker acting as a middle layer; provides custom mappings for `preferred_username` based on email domains and pulls geolocation data from CloudFlare. Would strongly recommend Keycloak. 
 
 This is a sanitized version of Illini Electric Motorsport's IdP & Authentication app, which came from Illini Formula Electric's Portal app - I made all three with similar functionality.
 
 ## Sign Out Behavior
 
-When users sign out / visit the `/logout` endpoint Mattermost OpenID Connect Broker checks if a cookie called `authentik_session` exists. If the cookie exists the user is redirected to the Authentik default invalidation flow, with the Authentik domain configured in the `idp.cfg` file.
+When users sign out / visit the `/logout` endpoint Mattermost OpenID Connect Broker checks if a cookie from the upstream OIDC client / authorization platform exists. If the cookie exists, the user is redirected to the authorization platform invalidation flow, with the authorization platform domain configured in the `idp.cfg` file. The name of the cookie is set in the `idp.cfg` file under `upstream_cookie`.
 
-This requires that the default invalidation flow for Authentik redirect users to the Mattermost OpenID Connect Broker sign out endpoint after Authentik signs out. Otherwise the IdP session is not revoked when the user visits the `/logout` endpoint.
+This requires that the default invalidation flow for upstream authorization platform redirect users to the Mattermost OpenID Connect Broker sign out endpoint after Authentik signs out. Otherwise the IdP session is not revoked when the user visits the `/logout` endpoint.
 
 ## Requirements
 
@@ -41,7 +41,7 @@ This requires that the default invalidation flow for Authentik redirect users to
 3. Add the Flask app files and the Service files in their proper folders
     - Service file goes `/etc/systemd/system`
 4. Randomly generate secret key and update `idp.cfg` app_secret_key under OAUTH
-    - Do not save this key. Should be replaced on every reinstall
+    - Do not save this key. Should be replaced on every reinstall or recovery
 5. Init databases 
     - `flask db upgrade`
     - Connect to database and run [mysql_retention.sql](mysql_retention.sql)
@@ -58,10 +58,12 @@ This requires that the default invalidation flow for Authentik redirect users to
 
 ## Configuration Settings
 
-`idp_domain`: Where Mattermost OpenID Connect Broker will be accsible from. Domain (and port) without protocol.   
+`idp_domain`: Where Mattermost OpenID Connect Broker will be accessible from. Domain (and port) without protocol.   
 `sso_domain`: Top level domain, can be the same as `idp_domain` if a subdomain is not used for Mattermost OpenID Connect Broker.  
+`upstream_cookie` : Name of cookie that upstream OIDC client / authorization platform uses. If none, set to a random value.
+`upstream_sso_path` : Path to logout of upstream OIDC client / authorization platform - do not set port and protocol here.
 `mattermost_url`: Domain, protocol, and port of Mattermost instance.  
-`authentik_domain`: Domain, protocol, and port of Authentik instance, if using Keycloak set to same value of `idp_domain`.  
+`upstream_sso_domain`: Domain, protocol, and port of upstream OIDC client / authorization platform, if using Keycloak set to same value of `idp_domain`.  
 `trusted_root`: Domains Mattermost OpenID Connect Broker is allowed to redirect to. Should be same as `sso_domain`.  
 
 
@@ -93,21 +95,21 @@ Using Flask-Migrate, full schema available in [flaskr/models.py](flaskr/models.p
 
 List of possible error messages:
 
-| User message                                                            | Possible Issue                                                                                                               |
-|-------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| MismatchingStateError                                                   | Authlib MismatchingStateError from JWT token received from Mattermost                                                        |
-| MissingRequestTokenError                                                | Authlib request token is empty when calling authorize_access_token                                                           |
-| MissingTokenError                                                       | Authlib MissingTokenError error when calling authorize_access_token                                                          |
-| authorize_access_token Exception                                        | Authlib authorize_access_token function ran into an error when retrieving access token. More information is written to logs  |
-| OAuth2 Token Invalid                                                    | access_token is missing after Authlib called authorize_access_token                                                          |
-| OAuth2 user info error                                                  | Unable to get user info from OAuth2 user info endpoint                                                                       |
-| Unable to convert session                                               | user_info from OAuth2 user info endpoint is invalid, or there is an issue with Flask sessions                                |
-| Invalid attributes. Please set your first and last name, and try again. | User does not have both first and last name set                                                                              |
-| handle_login Exception                                                  | Issue when calling handle_login. Most likely database connection issue                                                       |
-| user_local_data handle_login Domain ID invalid count                    | Multiple users entries exist with the same Mattermost ID                                                                     |
-| user_local_data handle_login domain invalid                             | The email domain is not on the approved list of domains                                                                      |
-| user_local_data handle_login unable to write user                       | user_manager.add_user failed to create a user                                                                                |
-| global_sso                                                              | Unable to create a instance of global SSO login credentials/cookie. May be issue reading CloudFlare headers or writing to DB |
+| User message                                                            | Possible Issue                                                                                                                     |
+|-------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| MismatchingStateError                                                   | Authlib MismatchingStateError from JWT token received from Mattermost                                                              |
+| MissingRequestTokenError                                                | Authlib request token is empty when calling authorize_access_token                                                                 |
+| MissingTokenError                                                       | Authlib MissingTokenError error when calling authorize_access_token                                                                |
+| authorize_access_token Exception                                        | Authlib authorize_access_token function ran into an error when retrieving access token. More information is written to logs        |
+| OAuth2 Token Invalid                                                    | access_token is missing after Authlib called authorize_access_token                                                                |
+| OAuth2 user info error                                                  | Unable to get user info from OAuth2 user info endpoint                                                                             |
+| Unable to convert session                                               | user_info from OAuth2 user info endpoint is invalid, or there is an issue with Flask sessions                                      |
+| Invalid attributes. Please set your first and last name, and try again. | User does not have both first and last name set                                                                                    |
+| handle_login Exception                                                  | Issue when calling handle_login. Most likely database connection issue                                                             |
+| user_local_data handle_login Domain ID invalid count                    | Multiple users entries exist with the same Mattermost ID                                                                           |
+| user_local_data handle_login domain invalid                             | The email domain is not on the approved list of domains                                                                            |
+| user_local_data handle_login unable to write user                       | user_manager.add_user failed to create a user                                                                                      |
+| global_sso                                                              | Unable to create a instance of global SSO login credentials/cookie. May be issue reading CloudFlare headers or writing to database |
 
 
 ## Verbiage

@@ -10,6 +10,7 @@ from .appActions import appConfig
 
 IDP_DOMAIN = app.config['ife_IDP_DOMAIN']
 ife_MATTERMOST_URL = app.config['ife_MATTERMOST_URL']
+UPSTREAM_COOKIE = app.config['ife_UPSTREAM_COOKIE']
 
 local_auth = Blueprint('local_auth', __name__, template_folder='templates')
 
@@ -202,9 +203,9 @@ def logout():
     IFE_GLOBAL_SSO_CRED = request.cookies.get('IFE_GLOBAL_SSO_CRED', "")
 
     # If Authentik session exists, redirect to URL logout
-    authentik_session = request.cookies.get('authentik_session', False)
-    if authentik_session != False:
-        return redirect(app.config['ife_AUTHENTIK_DOMAIN'] + "/flows/-/default/invalidation/")
+    upstream_cookie_set = request.cookies.get(UPSTREAM_COOKIE, False)
+    if upstream_cookie_set != False:
+        return redirect(app.config['ife_UPSTREAM_SSO_DOMAIN'] + app.config['ife_UPSTREAM_SSO_PATH'])
     
     for key in list(session.keys()):
         session.pop(key)
