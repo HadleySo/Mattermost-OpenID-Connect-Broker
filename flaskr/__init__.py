@@ -12,7 +12,7 @@ cfg.read(fullConfigPath)
 # create the app
 app = Flask(__name__, host_matching=True, static_host=cfg.get('DOMAINS', 'idp_domain'))
 
-app.config['app_version'] = "2.4.0"
+app.config['app_version'] = "2.5.0"
 app.config['ife_IDP_DOMAIN'] = cfg.get('DOMAINS', 'idp_domain')
 app.config['ife_UPSTREAM_SSO_DOMAIN'] = cfg.get('DOMAINS', 'upstream_sso_domain')
 app.config['ife_UPSTREAM_COOKIE'] = cfg.get('DOMAINS', 'upstream_cookie')
